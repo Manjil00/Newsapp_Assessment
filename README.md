@@ -18,10 +18,10 @@ The News App developed in React.js is a simple news site containing basic and al
 
 ## Screenshots
 
-![App Screenshot](/newsapp/public/screenshots/aos.png )
-![App Screenshot](/newsapp/public/screenshots/api.png )
-![App Screenshot](/newsapp/public/screenshots/HiidenKey.png )
-![App Screenshot](/newsapp/public/screenshots/search.png )
+![App Screenshot](/public/screenshots/aos.png )
+![App Screenshot](/public/screenshots/api.png )
+![App Screenshot](/public/screenshots/HiidenKey.png )
+![App Screenshot](/public/screenshots/search.png )
 
 
 
