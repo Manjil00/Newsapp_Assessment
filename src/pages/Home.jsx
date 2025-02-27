@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Home = () => {
 
@@ -17,9 +19,18 @@ const Home = () => {
         }
     }
 
+    const filteredNews = news.filter(article =>
+        article.title?.toLowerCase().includes(search.toLowerCase())
+    );
+    
+    const offset = 200;
+    const duration = 600;
+
     useEffect(()=>{
         fetchAPI();
-    },[API_KEY])
+        Aos.init({offset:50,duration:600});
+    },[API_KEY,offset,
+        duration])
 
 return (
 <div className="main h-[100vh] w-full flex flex-col justify-center items-center">
@@ -34,17 +45,21 @@ return (
 
 <div className="newssection w-full h-[500px] px-6 lg:p-10">
     <div className="section w-full h-auto grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-10">
-    {
-        news.map((articles,index)=>{
-            return(
-                <div key={index}
-                className="Section w-[95%] cursor-pointer h-auto lg-w-[500px] lg:h-[350px] rounded-xl bg-slate-200 shadow-2xl shadow-black p-5 flex flex-col justify-center items-start gap-3">
-        <h1 className="text-black text-xl lg:text-2xl">{articles.title}</h1>
-        <p className="text-black text-sm lg:text-base">{articles.description}</p>
-        <h2 className="text-blue-400 text-sm lg:text-sm">Published date:  {articles.publishedAt}</h2>
-        </div>
-            )
-        })
+    {   filteredNews.length >0 ? (
+            filteredNews.map((articles,index)=>{
+                return(
+                    <div key={index}
+                    className="Section w-[95%] cursor-pointer h-auto lg-w-[500px] lg:h-[350px] rounded-xl bg-slate-200 shadow-2xl shadow-black p-5 flex flex-col justify-center items-start gap-3" data-aos="fade-up">
+            <h1 className="text-black text-xl lg:text-2xl">{articles.title}</h1>
+            <p className="text-black text-sm lg:text-base">{articles.description}</p>
+            <h2 className="text-blue-400 text-sm lg:text-sm">Published date:  {articles.publishedAt}</h2>
+            </div>
+                )
+            })
+    ) :(
+        <p className='text-black text-sm lg:text-base'>No matching News Found </p>
+    )
+        
 }
         
     </div>
